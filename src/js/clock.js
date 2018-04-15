@@ -1,22 +1,22 @@
-var can = document.getElementById('canvas');
-var locText = document.getElementById('location');
-var ctx=can.getContext("2d");
+let  canvas = document.getElementById('canvas');
+// let  locText = document.getElementById('location');
+let  ctx=canvas.getContext("2d");
 
 //圆心坐标
-var a = canvas.width/2;
-var b = canvas.height/2;
+let  a = canvas.width/2;
+let  b = canvas.height/2;
 
-function strokecircle(r,width,color){ // 表盘
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    ctx.arc(a,b,r,0,2*Math.PI);
-    ctx.stroke();
-    ctx.closePath();
-}
+// function strokeCircle(r,width,color){ // 表盘
+//     ctx.beginPath();
+//     ctx.strokeStyle = color;
+//     ctx.lineWidth = width;
+//     ctx.arc(a,b,r,0,2*Math.PI);
+//     ctx.stroke();
+//     ctx.closePath();
+// }
 
-function strokeline(r,width,color,sec){ // 线条
-    var t,u;
+function strokeLine(r,width,color,sec){ // 线条
+    let  t,u;
     ctx.beginPath();
     ctx.lineCap="round";
     ctx.strokeStyle = color;
@@ -33,7 +33,7 @@ function strokeline(r,width,color,sec){ // 线条
     ctx.closePath();
 }
 
-function fillcircle(r,color){ // 填充圆
+function fillCircle(r,color){ // 填充圆
     ctx.beginPath();
     ctx.shadowColor="#ffffff";
     ctx.shadowOffsetX=0;
@@ -45,9 +45,9 @@ function fillcircle(r,color){ // 填充圆
     ctx.closePath();
 }
 
-function grdcircle(r,color1,color2){ // 空心圆
+function grdCircle(r,color1,color2){ // 空心圆
     ctx.beginPath();
-    var grd=ctx.createLinearGradient(150,0,150,300);
+    let  grd=ctx.createLinearGradient(150,0,150,300);
     grd.addColorStop(0,color1);
     grd.addColorStop(1,color2);
     ctx.shadowColor="#ffffff";
@@ -61,37 +61,37 @@ function grdcircle(r,color1,color2){ // 空心圆
 }
 
 
-function clocknumber(r,color,fontstyle){ // 表盘数字
+function clockNumber(r,color,fontStyle){ // 表盘数字
     ctx.beginPath();
     ctx.shadowColor="#ffffff";
     ctx.shadowOffsetX=0;
     ctx.shadowOffsetY=0;
     ctx.shadowBlur=0;
-    ctx.font = fontstyle;
-    for(var p=1;p<=60;p++) {
-        var o = (p-15)*6;
-        t=a+r*Math.cos(2*Math.PI/360*o);
-        u=b+r*Math.sin(2*Math.PI/360*o);
+    ctx.font = fontStyle;
+    for(let  p=1;p<=60;p++) {
+        let  o = (p-15)*6;
+        let t=a+r*Math.cos(2*Math.PI/360*o);
+        let u=b+r*Math.sin(2*Math.PI/360*o);
         if(isInteger(p/5)){
             ctx.fillStyle=color;
-            var text = ""+p/5+"";
-            var w=ctx.measureText(text).width/2;
-            ctx.fillText(p/5,t-w,u+9);
+            let  text = ""+p/5+"";
+            let  w=ctx.measureText(text).width/2;
+            ctx.fillText(String(p/5),t-w,u+9);
         }
         ctx.closePath();
     }
 }
 
-function fillText(x,y,fontcolor,fontstyle,text,align){ // 文字
+function fillText(x,y,fontcolor,fontStyle,text,align){ // 文字
     ctx.beginPath();
     ctx.shadowColor=fontcolor;
     ctx.shadowOffsetX=0;
     ctx.shadowOffsetY=0;
     ctx.shadowBlur=0;
     ctx.fillStyle=fontcolor;
-    ctx.font=fontstyle;
+    ctx.font=fontStyle;
     text = ""+text+"";
-    if(align=="center") {
+    if(align==="center") {
         ctx.fillText(text,x-(ctx.measureText(text).width/2),y);
     } else {
         ctx.fillText(text,x,y);
@@ -106,8 +106,9 @@ function isInteger(obj) { // 判断整数
 }
 
 function scale(r,width){ // 刻度
-    for(var p=1;p<=60;p++) {
-        var o=p*6;
+    let v, c, t, u, o;
+    for(let  p=1;p<=60;p++) {
+         o=p*6;
         t=a+r*Math.cos(2*Math.PI/360*o);
         u=b+r*Math.sin(2*Math.PI/360*o);
         if(isInteger(o/5)){
@@ -130,23 +131,23 @@ function scale(r,width){ // 刻度
 }
 
 function second(s,l){ // 秒针
-    var sec = (s-15)*6;
-    strokeline(l,4,"red",sec);
+    let  sec = (s-15)*6;
+    strokeLine(l,4,"red",sec);
 }
 function minute(rot,s,l){ // 分针
     rot = rot+s/60-15;
-    var sec = rot*6;
-    strokeline(l,10,"#222222",sec);
-    strokeline(l-2,2,"#ffffff",sec);
+    let  sec = rot*6;
+    strokeLine(l,10,"#222222",sec);
+    strokeLine(l-2,2,"#ffffff",sec);
 }
 function hour(rot,m,l){ // 时针
     rot = rot*5+(m/60)*5-15;
-    var sec = rot*6;
-    strokeline(l,10,"#222222",sec);
-    strokeline(l-2,2,"#ffffff",sec);
+    let  sec = rot*6;
+    strokeLine(l,10,"#222222",sec);
+    strokeLine(l-2,2,"#ffffff",sec);
 }
 
-function strokerect(x,y,a,b,width,color){ // 矩形
+function strokeRect(x,y,a,b,width,color){ // 矩形
     ctx.beginPath();
     ctx.strokeStyle=color;
     ctx.lineWidth=width;
@@ -154,7 +155,7 @@ function strokerect(x,y,a,b,width,color){ // 矩形
     ctx.closePath();
 }
 
-function fillerect(x,y,a,b,width,color){ // 矩形
+function fillRect(x,y,a,b,width,color){ // 矩形
     ctx.beginPath();
     ctx.fillStyle=color;
     ctx.lineWidth=width;
@@ -163,66 +164,67 @@ function fillerect(x,y,a,b,width,color){ // 矩形
 }
 
 function getTime(){ // 获取时间
-    var myDate = new Date();
-    var myDay = myDate.getDate()
-    var myWeek = myDate.getDay();
-    var timeSec = myDate.getSeconds();
-    var timeMinu = myDate.getMinutes();
-    var timeHour = myDate.getHours();
-    var Millsec = myDate.getMilliseconds()/1000;
-    var arr_week = new Array("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN");
+    let  myDate = new Date();
+    let  myDay = myDate.getDate()
+    let  myWeek = myDate.getDay();
+    let  timeSec = myDate.getSeconds();
+    let  timeMin = myDate.getMinutes();
+    let  timeHour = myDate.getHours();
+    let  millSec = myDate.getMilliseconds()/1000;
+    let  arr_week = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
     myDate = {
         "myDay":myDay,
         "myWeek":arr_week[myWeek],
         "timeSec":timeSec,
-        "timeMinu":timeMinu,
+        "timeMin":timeMin,
         "timeHour":timeHour,
-        "Millsec":Millsec
+        "millSec":millSec
     };
     return myDate;
 }
 
 function CanvasScale(n){ // 缩放
     n = n/350;
-    can.width=350*n;
-    can.height=350*n;
+    canvas.width=350*n;
+    canvas.height=350*n;
     ctx.scale(n,n);
 }
 
 function clock(){
-    var s = getTime().timeSec;
-    var m = getTime().timeMinu;
-    var h = getTime().timeHour;
-    var ms = getTime().Millsec;
-    var myweek = getTime().myWeek;
-    var myday = getTime().myDay;
+    let  s = getTime().timeSec;
+    let  m = getTime().timeMin;
+    let  h = getTime().timeHour;
+    let  ms = getTime().millSec;
+    let  myWeek = getTime().myWeek;
+    let  myDay = getTime().myDay;
     
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    fillcircle(150,"#222");
-    grdcircle(144,"#999","#ccc");
-    grdcircle(134,"#222","#666");
-    grdcircle(133,"#fff","#ccc");
+    fillCircle(150,"#222");
+    grdCircle(144,"#999","#ccc");
+    grdCircle(134,"#222","#666");
+    grdCircle(133,"#fff","#ccc");
     scale(131,1);
-    fillText(175,123,"#222","16px Georgia bold","CITYZEN","center");
+    fillText(175,123,"#222","16px Georgia bold","CITIZEN","center");
     fillText(175,236,"#222","10px Tahoma bold","AUTOMATIC","center");
-    strokerect(208,167,52,17,1,"#000");
-    fillerect(209,168,50,16,1,"#fff");
-    if (myweek=="SUN"){
-        var weekcolor = "red";
+    strokeRect(208,167,52,17,1,"#000");
+    fillRect(209,168,50,16,1,"#fff");
+    let weekColor
+    if (myWeek==="SUN"){
+        weekColor = "red";
     } else {
-        var weekcolor = "#222";
+        weekColor = "#222";
     }
-    fillText(225,181,weekcolor,"14px Tahoma bold",myweek,"center");
-    fillText(248,181,"#222","14px Tahoma bold",myday,"center");
-    clocknumber(102,"#222","24px Arial  bold");
-    fillcircle(10,"#999");
+    fillText(225,181,weekColor,"14px Tahoma bold",myWeek,"center");
+    fillText(248,181,"#222","14px Tahoma bold",myDay,"center");
+    clockNumber(102,"#222","24px Arial  bold");
+    fillCircle(10,"#999");
 
     hour(h,m,70);
     minute(m,s,92);
     second(s+ms,120);
     second(s+ms+30,18);
-    fillcircle(5,"red");
-    fillcircle(3,"#e2d8a1");
+    fillCircle(5,"red");
+    fillCircle(3,"#e2d8a1");
 }
 self.setInterval(clock,200);
 CanvasScale(300);// 缩放

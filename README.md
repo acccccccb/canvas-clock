@@ -1,3 +1,3 @@
 # canvas-clock
 用canvas绘制的时钟
-demo:http://www.ihtmlcss.com/test/canvas/clock.html
+demo:[http://www.ihtmlcss.com/test/canvas/clock.html](https://acccccccb.github.io/canvas-clock/)
